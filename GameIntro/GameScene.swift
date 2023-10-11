@@ -35,4 +35,19 @@ class GameScene: SKScene {
             square.run(sequence)
         }
     }
+    
+    // 5. Following the Touch
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            let move = SKAction.move(to: location, duration: 0.1)
+            square.run(move)
+        }
+    }
+    
+    // 6. Stop Touch
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let move = SKAction.move(to: CGPoint(x: size.width/2, y: size.height/2), duration: 0.1)
+        square.run(move)
+    }
 }
