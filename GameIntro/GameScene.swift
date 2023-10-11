@@ -24,7 +24,15 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            square.position = location
+            // square.position = location
+            
+            // 3. Gliding Animation
+            // 4. Sequence Actions
+            let move = SKAction.move(to: location, duration: 1.0)
+            let rotate = SKAction.rotate(byAngle: 90.0, duration: 1.0)
+            
+            let sequence = SKAction.sequence([move, rotate])
+            square.run(sequence)
         }
     }
 }
