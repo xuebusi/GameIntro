@@ -5,9 +5,10 @@
 //  Created by shiyanjun on 2023/10/11.
 //
 
-import Foundation
 import SpriteKit
 
 class GameScene: SKScene {
-    
+    override func didMove(to view: SKView) {
+        print("Game Scene Loaded")
+    }
 }
