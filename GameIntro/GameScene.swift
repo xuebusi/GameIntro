@@ -53,10 +53,29 @@ class GameScene: SKScene {
      }
      */
     
+    let backgroud = SKSpriteNode(imageNamed: "bg")
+    let backgroud2 = SKSpriteNode(imageNamed: "bg")
+    
     override func didMove(to view: SKView) {
+        createBackground()
         // 下落
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -50.0)
         createPlatform()
+    }
+    
+    func createBackground() {
+        backgroud.anchorPoint = .zero
+        backgroud.position = .zero
+        //backgroud.size = self.size
+        backgroud.zPosition = 1
+        addChild(backgroud)
+        
+        backgroud2.anchorPoint = .zero
+        backgroud2.position.y = .zero
+        backgroud2.position.x = backgroud.size.width
+        //backgroud2.size = self.size
+        backgroud2.zPosition = 1
+        addChild(backgroud2)
     }
     
     // 地面
@@ -65,6 +84,7 @@ class GameScene: SKScene {
         platform.size = CGSize(width: size.width, height: 50)
         platform.position = CGPoint(x: size.width/2, y: 25)
         platform.color = .brown
+        platform.zPosition = 2
         
         platform.physicsBody = SKPhysicsBody(rectangleOf: platform.size)
         
@@ -83,6 +103,7 @@ class GameScene: SKScene {
             square.size = CGSize(width: 50, height: 50)
             square.position = touch.location(in: self)
             square.color = colors.randomElement()!
+            square.zPosition = 3
             
             square.physicsBody = SKPhysicsBody(rectangleOf: square.size)
             
@@ -92,6 +113,18 @@ class GameScene: SKScene {
             square.physicsBody?.restitution = 0.4
             
             addChild(square)
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        backgroud.position.x -= 1
+        backgroud2.position.x -= 1
+        
+        if backgroud.position.x < -backgroud.size.width {
+            backgroud.position.x = backgroud2.position.x + backgroud.size.width
+        }
+        if backgroud2.position.x < -backgroud2.size.width {
+            backgroud2.position.x = backgroud.position.x + backgroud2.size.width
         }
     }
 }
