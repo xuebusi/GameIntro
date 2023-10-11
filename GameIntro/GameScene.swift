@@ -56,14 +56,33 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         // 下落
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -10.0)
+        createPlatform()
     }
+    
+    // 地面
+    func createPlatform() {
+        let platform = SKSpriteNode()
+        platform.size = CGSize(width: size.width, height: 50)
+        platform.position = CGPoint(x: size.width/2, y: 25)
+        platform.color = .brown
+        
+        platform.physicsBody = SKPhysicsBody(rectangleOf: platform.size)
+        
+        platform.physicsBody?.isDynamic = false
+        platform.physicsBody?.affectedByGravity = false
+        
+        addChild(platform)
+    }
+    
+    // 随机颜色
+    let colors: [UIColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemCyan, .systemBlue, .systemPurple]
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let square = SKSpriteNode()
             square.size = CGSize(width: 50, height: 50)
             square.position = touch.location(in: self)
-            square.color = .green
+            square.color = colors.randomElement()!
             
             square.physicsBody = SKPhysicsBody(rectangleOf: square.size)
             
