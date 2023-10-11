@@ -55,7 +55,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         // 下落
-        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -10.0)
+        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -50.0)
         createPlatform()
     }
     
@@ -88,6 +88,8 @@ class GameScene: SKScene {
             
             square.physicsBody?.isDynamic = true
             square.physicsBody?.affectedByGravity = true
+            // 弹力
+            square.physicsBody?.restitution = 0.4
             
             addChild(square)
         }
