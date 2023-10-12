@@ -58,8 +58,8 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         createBackground()
-        // 下落
-        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -50.0)
+        // 这句代码会导致场景中的精灵方块落地后不断晃动
+        // self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -50.0)
         createPlatform()
     }
     
@@ -67,6 +67,7 @@ class GameScene: SKScene {
         backgroud.anchorPoint = .zero
         backgroud.position = .zero
         //backgroud.size = self.size
+        backgroud.size.height = self.size.height
         backgroud.zPosition = 1
         addChild(backgroud)
         
@@ -74,6 +75,7 @@ class GameScene: SKScene {
         backgroud2.position.y = .zero
         backgroud2.position.x = backgroud.size.width
         //backgroud2.size = self.size
+        backgroud.size.height = self.size.height
         backgroud2.zPosition = 1
         addChild(backgroud2)
     }
@@ -119,7 +121,7 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         backgroud.position.x -= 1
         backgroud2.position.x -= 1
-        
+
         if backgroud.position.x < -backgroud.size.width {
             backgroud.position.x = backgroud2.position.x + backgroud.size.width
         }
