@@ -67,7 +67,6 @@ class GameScene: SKScene {
         backgroud.anchorPoint = .zero
         backgroud.position = .zero
         //backgroud.size = self.size
-        backgroud.size.height = self.size.height
         backgroud.zPosition = 1
         addChild(backgroud)
         
@@ -75,7 +74,6 @@ class GameScene: SKScene {
         backgroud2.position.y = .zero
         backgroud2.position.x = backgroud.size.width
         //backgroud2.size = self.size
-        backgroud.size.height = self.size.height
         backgroud2.zPosition = 1
         addChild(backgroud2)
     }
